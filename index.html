@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purpose Here — Studio</title>
+<link rel="icon" href="ph-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0C0B09">
+<link rel="apple-touch-icon" href="ph-icon.png">
+<meta name="description" content="Purpose Here — a one-person studio shipping real software. Bazaar is live. PurposePay is in testing.">
+<meta property="og:title" content="Purpose Here">
+<meta property="og:description" content="A one-person studio building real software, one product at a time — Bazaar and PurposePay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hero{
+    min-height:auto; display:flex; flex-direction:column; justify-content:center;
+    padding:150px 28px 80px; max-width:1080px; margin:0 auto; position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; top:-200px; right:-180px; width:640px; height:640px;
+    background:radial-gradient(circle, rgba(232,93,44,0.22) 0%, rgba(232,93,44,0) 68%);
+    pointer-events:none; z-index:0;
+  }
+  .hero::after{
+    content:""; position:absolute; bottom:-260px; left:-200px; width:560px; height:560px;
+    background:radial-gradient(circle, rgba(27,38,59,0.35) 0%, rgba(27,38,59,0) 70%);
+    pointer-events:none; z-index:0;
+  }
+  .hero > *{ position:relative; z-index:1; }
+  .hero-banner{
+    font-family:'Fraunces',serif; font-weight:700; font-size:clamp(2.2rem,6vw,3.4rem);
+    margin-bottom:24px; letter-spacing:-0.01em; color:var(--paper);
+  }
+  .hero-banner .p2{ padding:2px 12px; border-radius:8px; }
+  .ph-tagline{
+    font-family:'JetBrains Mono',monospace; font-size:0.8rem; font-weight:600;
+    color:var(--orange); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif; font-weight:600; color:var(--paper);
+    font-size:clamp(2.2rem, 5.4vw, 4rem); line-height:1.06; letter-spacing:-0.01em; max-width:760px;
+  }
+  .hero h1 em{ font-style:italic; font-weight:400; background:var(--grad-orange); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p.sub{ margin-top:20px; font-size:1.08rem; line-height:1.6; max-width:540px; color:var(--paper); opacity:0.62; }
+  .hero-cta{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+
+  .device-badge{
+    display:inline-flex; align-items:center; gap:8px; margin-top:28px;
+    font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:600;
+    border:1px solid var(--line); border-radius:100px; padding:8px 16px; opacity:0.6; color:var(--paper);
+  }
+
+  /* Scenario strip */
+  .scenario{
+    margin-top:44px; padding:24px 26px; border-radius:16px;
+    background:var(--surface); border-left:3px solid;
+    border-image:var(--grad-orange) 1;
+    color:var(--paper);
+    font-family:'Fraunces',serif; font-style:italic; font-size:1.02rem; line-height:1.55;
+    max-width:640px; position:relative;
+  }
+  .scenario::before{ content:"—"; background:var(--grad-orange); -webkit-background-clip:text; background-clip:text; color:transparent; font-style:normal; font-weight:700; margin-right:8px; }
+
+  /* Products grid */
+  .product-card{
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:20px;
+    background:var(--surface); color:var(--paper); border-radius:18px; padding:28px 26px;
+    transition:transform .2s, box-shadow .2s; position:relative; overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .product-card:hover{ transform:translateY(-3px); box-shadow:0 18px 44px rgba(0,0,0,0.5); }
+  .product-card::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+  }
+  .product-card.p-bazaar::before{ background:var(--grad-orange); }
+  .product-card.p-purposepay::before{ background:var(--grad-navy); }
+  .product-icon{
+    width:52px; height:52px; border-radius:12px; flex-shrink:0; overflow:hidden;
+    background:var(--paper); display:flex; align-items:center; justify-content:center;
+  }
+  .product-icon img{ width:100%; height:100%; object-fit:cover; }
+  .product-card h3{ font-family:'Fraunces',serif; font-size:1.3rem; font-weight:600; }
+  .product-card .tagline{ font-size:0.86rem; opacity:0.58; margin-top:4px; font-style:italic; }
+  .product-status{
+    font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:600;
+    white-space:nowrap; padding:5px 10px; border-radius:100px;
+  }
+  .product-card.p-bazaar .product-status{ color:#FF9466; background:rgba(232,93,44,0.16); }
+  .product-card.p-purposepay .product-status{ color:#8FA6D6; background:rgba(90,108,140,0.18); }
+  @media (max-width:600px){
+    .product-card{ grid-template-columns:auto 1fr; }
+    .product-status{ grid-column:1 / -1; margin-top:6px; justify-self:start; }
+  }
+
+  /* Teaser cards row */
+  .teaser-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:48px; }
+  @media (max-width:700px){ .teaser-grid{grid-template-columns:1fr;} }
+  .teaser-card{
+    border:1.5px solid var(--line); border-radius:16px; padding:26px 24px;
+    transition:border-color .2s, transform .2s;
+  }
+  .teaser-card:hover{ border-color:var(--orange); transform:translateY(-2px); }
+  .teaser-card .tlabel{ font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:600; color:var(--orange); text-transform:uppercase; }
+  .teaser-card h3{ font-family:'Fraunces',serif; font-size:1.15rem; font-weight:600; margin-top:10px; color:var(--paper); }
+  .teaser-card p{ font-size:0.88rem; opacity:0.58; margin-top:8px; line-height:1.55; color:var(--paper); }
+  .teaser-card .go{ display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-size:0.85rem; font-weight:600; color:var(--orange); }
+
+  .story-section{display:grid; grid-template-columns:0.8fr 1.2fr; gap:60px; align-items:start;}
+  @media (max-width:860px){ .story-section{grid-template-columns:1fr; gap:30px;} }
+  .story-section p{font-size:1.02rem; line-height:1.72; opacity:0.68; margin-bottom:18px; color:var(--paper);}
+  .story-tag{
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:600; color:var(--paper);
+    border:1px solid var(--line); border-radius:100px; padding:6px 14px; display:inline-block; margin-bottom:10px;
+  }
+
+  /* ---------- BUILDER SCENE ---------- */
+  .builder-wrap{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:40px; align-items:center;
+  }
+  @media (max-width:860px){ .builder-wrap{grid-template-columns:1fr; gap:10px;} }
+  .builder-p{ margin-top:18px; font-size:1.02rem; line-height:1.65; opacity:0.62; max-width:420px; color:var(--paper); }
+  .builder-scene{
+    width:100%; max-width:480px; margin:0 auto; opacity:0; transform:translateY(24px) scale(0.96);
+    transition:opacity .9s ease, transform .9s ease;
+  }
+  .builder-scene.in-view{ opacity:1; transform:translateY(0) scale(1); }
+
+  .figure-float{ animation:floatY 6s ease-in-out infinite; transform-origin:center; }
+  @keyframes floatY{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-9px);} }
+
+  .screen-pulse{ animation:screenPulse 2.3s ease-in-out infinite; transform-origin:center; }
+  @keyframes screenPulse{ 0%,100%{ opacity:0.75; } 50%{ opacity:1; } }
+
+  .glow-pulse{ animation:glowPulse 4s ease-in-out infinite; transform-origin:center; }
+  @keyframes glowPulse{ 0%,100%{ opacity:0.5;} 50%{ opacity:0.9;} }
+
+  .badge{ animation:badgeDrift 5.5s ease-in-out infinite; transform-origin:center; }
+  .badge-pay{ animation-duration:6.4s; animation-direction:reverse; }
+  @keyframes badgeDrift{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-10px);} }
+
+  .trail{ stroke-dashoffset:0; animation:trailFlow 1.6s linear infinite; }
+  .trail-b{ animation-duration:2s; animation-direction:reverse; }
+  @keyframes trailFlow{ to{ stroke-dashoffset:-40; } }
+
+  .sparkle{ animation:twinkle 3s ease-in-out infinite; }
+  .s2{ animation-delay:.5s; } .s3{ animation-delay:1s; } .s4{ animation-delay:1.6s; }
+  @keyframes twinkle{ 0%,100%{ opacity:0.15;} 50%{ opacity:0.85;} }
+
+  @media (prefers-reduced-motion: reduce){
+    .figure-float,.screen-pulse,.glow-pulse,.badge,.trail,.sparkle{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="ph-banner"><span class="p1">Purpose</span><span class="p2">Here</span></a>
+  <div class="navlinks">
+    <a href="index.html" class="active">Home</a>
+    <a href="bazaar.html">Bazaar</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-banner ph-banner"><span class="p1">Purpose</span><span class="p2">Here</span></div>
+  <div class="ph-tagline">Giving Ideas a Purpose</div>
+  <h1>A studio building<br>software around real <em>problems</em>,<br>not a pitch deck.</h1>
+  <p class="sub">Purpose Here ships products end-to-end — design, code, and launch. Two are already in people's hands: Bazaar, live and onboarding shops, and PurposePay, in testing.</p>
+  <div class="hero-cta">
+    <a href="bazaar.html" class="btn btn-primary">Explore Bazaar →</a>
+    <a href="https://instagram.com/sachintiwari_here" class="btn btn-ghost">Follow the Build</a>
+  </div>
+  <div class="device-badge">📱 Built entirely on a phone — no laptop, no desktop</div>
+
+  <div class="scenario">You're standing outside a kirana shop, wondering if it's open and what it actually has in stock. That's the exact moment Bazaar was built for.</div>
+</section>
+
+<section id="builder">
+  <div class="wrap builder-wrap">
+    <div class="builder-text">
+      <span class="label">THE STUDIO</span>
+      <h2 class="title">One person. One phone.<br>Real products.</h2>
+      <p class="builder-p">No office, no team, no funding — just a phone, late nights, and ideas that turn into things people actually use.</p>
+    </div>
+    <div class="builder-scene" id="builderScene">
+      <svg viewBox="0 0 480 480" width="100%" height="100%" aria-hidden="true">
+        <defs>
+          <radialGradient id="screenGlow" cx="50%" cy="35%" r="75%">
+            <stop offset="0%" stop-color="#FF9C6B"/>
+            <stop offset="55%" stop-color="#E85D2C"/>
+            <stop offset="100%" stop-color="#C8481E"/>
+          </radialGradient>
+          <radialGradient id="ambientGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(232,93,44,0.35)"/>
+            <stop offset="100%" stop-color="rgba(232,93,44,0)"/>
+          </radialGradient>
+        </defs>
+
+        <ellipse cx="240" cy="432" rx="118" ry="14" fill="rgba(252,250,246,0.06)"/>
+        <circle class="glow-pulse" cx="240" cy="360" r="150" fill="url(#ambientGlow)"/>
+
+        <g class="figure-float">
+          <!-- sitting figure -->
+          <path d="M150,422 Q150,296 240,296 Q330,296 330,422 Z" fill="#1E1A14" stroke="#FCFAF6" stroke-width="2"/>
+          <circle cx="240" cy="264" r="40" fill="#1E1A14" stroke="#FCFAF6" stroke-width="2"/>
+
+          <!-- arms reaching to phone -->
+          <path d="M172,332 Q150,372 206,382" stroke="#FCFAF6" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M308,332 Q330,372 274,382" stroke="#FCFAF6" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+          <!-- phone -->
+          <g class="phone-glow">
+            <rect x="203" y="352" width="74" height="116" rx="11" fill="#17140F" stroke="#FCFAF6" stroke-width="2"/>
+            <rect class="screen-pulse" x="211" y="362" width="58" height="86" rx="5" fill="url(#screenGlow)"/>
+          </g>
+        </g>
+
+        <!-- rising trail to bazaar badge -->
+        <path class="trail" d="M215,355 C190,280 170,220 150,175" stroke="rgba(252,250,246,0.28)" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round" fill="none"/>
+        <!-- rising trail to purposepay badge -->
+        <path class="trail trail-b" d="M265,355 C295,280 315,215 332,155" stroke="rgba(252,250,246,0.28)" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round" fill="none"/>
+
+        <g class="badge badge-bazaar">
+          <circle cx="150" cy="165" r="25" fill="url(#screenGlow)"/>
+          <path d="M140,160 h20 M143,160 v-4 a7,7 0 0 1 14,0 v4" stroke="#FCFAF6" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M140,160 l2,16 h16 l2,-16 Z" fill="none" stroke="#FCFAF6" stroke-width="2.2" stroke-linejoin="round"/>
+        </g>
+
+        <g class="badge badge-pay">
+          <circle cx="332" cy="145" r="25" fill="#2D3F5C"/>
+          <text x="332" y="154" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="22" fill="#FCFAF6">₹</text>
+        </g>
+
+        <circle class="sparkle s1" cx="105" cy="260" r="3" fill="#FCFAF6"/>
+        <circle class="sparkle s2" cx="378" cy="230" r="2.5" fill="#FCFAF6"/>
+        <circle class="sparkle s3" cx="360" cy="330" r="2" fill="#FCFAF6"/>
+        <circle class="sparkle s4" cx="95" cy="340" r="2.5" fill="#FCFAF6"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <span class="label">PRODUCTS</span>
+    <h2 class="title">What we're building</h2>
+
+    <div style="margin-top:48px; display:flex; flex-direction:column; gap:18px;">
+      <a href="bazaar.html" class="product-card p-bazaar">
+        <div class="product-icon"><img src="bazaar-logo.png" alt="Bazaar"></div>
+        <div>
+          <h3>Bazaar</h3>
+          <div class="tagline">"Bringing the market to your screen."</div>
+        </div>
+        <span class="product-status">● LIVE — ONBOARDING</span>
+      </a>
+
+      <a href="https://purposepay.netlify.app/" class="product-card p-purposepay">
+        <div class="product-icon"><img src="purposepay-logo.png" alt="PurposePay"></div>
+        <div>
+          <h3>PurposePay</h3>
+          <div class="tagline">"Every rupee has a reason."</div>
+        </div>
+        <span class="product-status">● IN TESTING</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="more">
+  <div class="wrap">
+    <span class="label">MORE FROM THE STUDIO</span>
+    <h2 class="title">Things we're working on alongside Bazaar</h2>
+
+    <div class="teaser-grid">
+      <div class="teaser-card">
+        <span class="tlabel">○ COMING SOON</span>
+        <h3>Dev Logs</h3>
+        <p>Short, regular updates on what's being built, fixed, and learned — written as it happens, not polished after the fact.</p>
+        <a href="https://instagram.com/sachintiwari_here" class="go">Follow on Instagram →</a>
+      </div>
+      <div class="teaser-card">
+        <span class="tlabel">○ DIRECT LINE</span>
+        <h3>Have a shop?</h3>
+        <p>If you run a local shop and want to get listed on Bazaar, skip the form — message directly on WhatsApp.</p>
+        <a href="https://wa.me/919910377585?text=Hi%2C%20I%20want%20to%20list%20my%20shop%20on%20Bazaar" class="go">Message on WhatsApp →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <span class="label">FAQ</span>
+    <h2 class="title">Common questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Is Bazaar available on the Play Store?<span class="plus">+</span></div>
+        <div class="faq-a"><p>Not yet. Bazaar is currently available as a direct APK download while we onboard our first shopkeepers and gather feedback. A Play Store release is planned for a later stage.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is it safe to install the APK?<span class="plus">+</span></div>
+        <div class="faq-a"><p>Yes. Your phone may show an "unknown source" warning since it's outside the Play Store — this is normal for direct APK installs. You'll need to allow installation from this source once.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I list my shop on Bazaar?<span class="plus">+</span></div>
+        <div class="faq-a"><p>Message us directly on WhatsApp — link above. We're onboarding shopkeepers personally right now, so you'll be talking to a real person, not a form.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is Bazaar free to use?<span class="plus">+</span></div>
+        <div class="faq-a"><p>Yes, Bazaar is free for customers to browse and order. We're still finalizing how the shop-owner side will work long-term.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What cities does Bazaar work in?<span class="plus">+</span></div>
+        <div class="faq-a"><p>Bazaar is starting hyperlocal — currently onboarding shops in Delhi as the first market before expanding further.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is PurposePay ready to use?<span class="plus">+</span></div>
+        <div class="faq-a"><p>The core features are — expense tracking, budgets, and goals all work today in local mode. Google sign-in, UPI upgrade, and AI insights are still being fixed, so stick to local mode for now. <a href="https://purposepay.netlify.app/" style="color:var(--orange); font-weight:600;">Try it here.</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap story-section">
+    <div>
+      <span class="story-tag mono">SOFTWARE_FOR_INDIA</span><br>
+      <span class="story-tag mono" style="margin-top:10px;">STUDENT_BUILDER</span>
+    </div>
+    <div>
+      <h2 class="title" style="margin-bottom:22px;">Building software for the India that doesn't show up in pitch decks.</h2>
+      <p>Most apps are built for people who already have ten apps doing the same thing. Bazaar is built for the kirana shop owner who has none — and the customer standing outside wondering if it's open. PurposePay is built for the person tracking every rupee by hand because no app fit how they actually spend.</p>
+      <p>Purpose Here is a one-person studio building real products, one app at a time, in public.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-grid">
+    <a href="index.html" class="ph-banner"><span class="p1">Purpose</span><span class="p2">Here</span></a>
+    <div class="foot-links">
+      <a href="https://instagram.com/sachintiwari_here">Instagram</a>
+      <a href="bazaar.html">Bazaar</a>
+      <a href="https://purposepay.netlify.app/">PurposePay</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+  <div class="copyright">© 2026 PURPOSE HERE — GIVING IDEAS A PURPOSE.</div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  var scene = document.getElementById('builderScene');
+  if (scene) {
+    var reveal = function(){ scene.classList.add('in-view'); };
+    try {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting) { reveal(); io.unobserve(scene); } });
+      }, { threshold: 0.2 });
+      io.observe(scene);
+    } catch(err) { reveal(); }
+    // safety net: never leave the illustration stuck invisible
+    setTimeout(reveal, 1800);
+  }
+</script>
+</body>
+</html>
