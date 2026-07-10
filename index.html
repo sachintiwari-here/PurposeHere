@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Purpose Here — Studio</title>
-<link rel="icon" href="ph-icon.png">
+<link rel="icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0C0B09">
-<link rel="apple-touch-icon" href="ph-icon.png">
+<link rel="apple-touch-icon" href="icon.png">
 <meta name="description" content="Purpose Here — a one-person studio shipping real software. Bazaar is live. PurposePay is in testing.">
 <meta property="og:title" content="Purpose Here">
 <meta property="og:description" content="A one-person studio building real software, one product at a time — Bazaar and PurposePay.">
@@ -49,10 +49,16 @@
   .hero p.sub { margin-top: 20px; font-size: 1.08rem; line-height: 1.6; max-width: 540px; color: var(--paper); opacity: 0.62; }
   .hero-cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
 
+  /* छोटा स्पॉट इलस्ट्रेशन (Badge) - हीरो सेक्शन के लिए */
   .device-badge {
-    display: inline-flex; align-items: center; gap: 8px; margin-top: 28px;
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 28px;
     font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 600;
-    border: 1px solid var(--line); border-radius: 100px; padding: 8px 16px; opacity: 0.6; color: var(--paper);
+    border: 1px solid var(--line); border-radius: 100px; padding: 8px 18px; color: var(--paper);
+    background: rgba(12,11,9,0.6); position: relative;
+  }
+  .device-badge::before {
+    content: ""; display: inline-block; width: 16px; height: 16px;
+    background: url('small-badge.png') no-repeat center/contain; opacity: 0.8;
   }
 
   .scenario {
@@ -113,17 +119,27 @@
   .card-actions { display: flex; gap: 12px; width: 100%; }
   .card-actions .btn { flex: 1; justify-content: center; font-size: 0.88rem; padding: 12px 16px; }
 
-  /* Teaser Cards Section */
+  /* Teaser Cards Section with Spot Illustration Integration */
   .teaser-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 48px; }
   @media (max-width: 700px) { .teaser-grid { grid-template-columns: 1fr; } }
   .teaser-card {
     border: 1.5px solid var(--line); border-radius: 16px; padding: 26px 24px;
-    transition: border-color .2s, transform .2s; background: transparent;
+    transition: border-color .2s, transform .2s; background: transparent; position: relative; overflow: hidden;
   }
   .teaser-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+  
+  /* छोटा स्पॉट इलस्ट्रेशन - टीज़र कार्ड्स के बैकग्राउंड के लिए */
+  .teaser-card::after {
+    content: ""; position: absolute; bottom: 10px; right: 10px; width: 45px; height: 45px;
+    opacity: 0.15; pointer-events: none; transition: opacity 0.2s;
+  }
+  .teaser-card.t-log::after { background: url('small-log.png') no-repeat center/contain; }
+  .teaser-card.t-whatsapp::after { background: url('small-chat.png') no-repeat center/contain; }
+  .teaser-card:hover::after { opacity: 0.4; }
+
   .teaser-card .tlabel { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; color: var(--orange); text-transform: uppercase; }
   .teaser-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; margin-top: 10px; color: var(--paper); }
-  .teaser-card p { font-size: 0.88rem; opacity: 0.58; margin-top: 8px; line-height: 1.55; color: var(--paper); }
+  .teaser-card p { font-size: 0.88rem; opacity: 0.58; margin-top: 8px; line-height: 1.55; color: var(--paper); padding-right: 30px; }
   .teaser-card .go { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-size: 0.85rem; font-weight: 600; color: var(--orange); }
 
   /* Story Layout Section */
@@ -166,6 +182,7 @@
   }
   .product-card:hover .card-art-container img { opacity: 1; transform: scale(1.02); }
 
+  /* FAQ Layout with Small Illustration Integration */
   .faq-blueprint-wrap {
     display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: start;
   }
@@ -196,11 +213,12 @@
     <a href="bazaar.html" class="btn btn-orange">Explore Bazaar →</a>
     <a href="https://instagram.com/sachintiwari_here" class="btn btn-ghost">Follow the Build</a>
   </div>
-  <div class="device-badge">📱 Built entirely on a phone — no laptop, no desktop</div>
+  <!-- छोटा स्पॉट इलस्ट्रेशन आइकॉन के साथ सिंक -->
+  <div class="device-badge">Built entirely on a phone — no laptop, no desktop</div>
   <div class="scenario">You're standing outside a kirana shop, wondering if it's open and what it actually has in stock. That's the exact moment Bazaar was built for.</div>
 </section>
 
-<!-- IMAGE 1: STUDIO SECTION (SOLO DEVELOPER IN ROCKSTAR ART STYLE) -->
+<!-- MAIN STUDIO IMAGE -->
 <section id="builder">
   <div class="wrap builder-wrap">
     <div class="builder-text">
@@ -214,14 +232,14 @@
   </div>
 </section>
 
-<!-- PRODUCTS SECTION WITH INTEGRATED PRODUCT CARD IMAGES -->
+<!-- PRODUCTS SECTION -->
 <section id="products">
   <div class="wrap">
     <span class="label">PRODUCTS</span>
     <h2 class="title">What we're building</h2>
 
     <div class="products-grid">
-      <!-- BAZAAR CARD (IMAGE 2: KIRANA SHOPKEEPER) -->
+      <!-- BAZAAR CARD -->
       <div class="product-card p-bazaar">
         <div>
           <div class="product-header">
@@ -247,12 +265,13 @@
         </div>
       </div>
 
-      <!-- PURPOSE PAY CARD (IMAGE 3: RUPEE GLOW IN HANDS) -->
+      <!-- PURPOSE PAY CARD (यहाँ तुम icon.png या जो भी सही नाम है वो बदल सकते हो) -->
       <div class="product-card p-purposepay">
         <div>
           <div class="product-header">
             <div class="product-info-block">
-              <div class="product-icon"><img src="icon1.png" alt="PurposePay"></div>
+              <!-- तुम यहाँ src="icon.png" या अपने सही लोगो का नाम बदल सकते हो -->
+              <div class="product-icon"><img src="icon.png" alt="PurposePay"></div>
               <div>
                 <h3>PurposePay</h3>
                 <div class="tagline">"Every rupee has a reason."</div>
@@ -276,18 +295,21 @@
   </div>
 </section>
 
+<!-- MORE FROM THE STUDIO WITH INTEGRATED SPOT ILLUSTRATIONS -->
 <section id="more">
   <div class="wrap">
     <span class="label">MORE FROM THE STUDIO</span>
     <h2 class="title">Things we're working on alongside Bazaar</h2>
     <div class="teaser-grid">
-      <div class="teaser-card">
+      <!-- छोटे बैकग्राउंड इलस्ट्रेशन के साथ कार्ड -->
+      <div class="teaser-card t-log">
         <span class="tlabel">○ COMING SOON</span>
         <h3>Dev Logs</h3>
         <p>Short, regular updates on what's being built, fixed, and learned — written as it happens, not polished after the fact.</p>
         <a href="https://instagram.com/sachintiwari_here" class="go">Follow on Instagram →</a>
       </div>
-      <div class="teaser-card">
+      <!-- छोटे बैकग्राउंड इलस्ट्रेशन के साथ कार्ड -->
+      <div class="teaser-card t-whatsapp">
         <span class="tlabel">○ DIRECT LINE</span>
         <h3>Have a shop?</h3>
         <p>If you run a local shop and want to get listed on Bazaar, skip the form — message directly on WhatsApp.</p>
@@ -297,7 +319,7 @@
   </div>
 </section>
 
-<!-- FAQ SECTION WITH BLUEPRINT ARTWORK (IMAGE 5) -->
+<!-- FAQ SECTION WITH BLUEPRINT -->
 <section id="faq">
   <div class="wrap faq-blueprint-wrap">
     <div>
@@ -336,7 +358,7 @@
   </div>
 </section>
 
-<!-- STORY SECTION WITH CHAI AND CODE ARTWORK (IMAGE 4) -->
+<!-- STORY SECTION WITH CHAI IMAGES -->
 <section id="story">
   <div class="wrap story-section">
     <div class="rk-glow-pulse rk-blend-right">
